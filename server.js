@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const request = require('request')
@@ -32,14 +33,12 @@ app.post('/',function(req,res){
   }
 
   const jsonData = JSON.stringify(data)
-  const url = "https://us10.api.mailchimp.com/3.0/lists/35b149e1e4"
-
   const options = {
     method: "POST",
-    auth: "nishanth:9a79b6bb249dd53fccd4698d23de70cf-us10"
+    auth: process.env.KEY
   }
 
-  const request = https.request(url, options, function(response){
+  const request = https.request(process.env.URL, options, function(response){
 
     if(response.statusCode === 200){
       res.sendFile(__dirname + '/Success.html')
@@ -64,9 +63,3 @@ app.post('/Failure',function(req,res){
 app.listen(process.env.PORT || 3000,function(){
   console.log('panda server started')
 })
-
-
-
-// 9a79b6bb249dd53fccd4698d23de70cf-us10
-
-// 35b149e1e4
